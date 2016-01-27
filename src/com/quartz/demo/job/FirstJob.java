@@ -25,10 +25,10 @@ public class FirstJob implements Job {
             JobDataMap dataMap = context.getJobDetail().getJobDataMap();
 
             String name = dataMap.getString("name");
-        	System.out.println(Thread.currentThread().getName()+" started at: \t" + sdf.format(new Date()));  
+        	System.out.println(context.getJobDetail().getKey() + ":" + Thread.currentThread().getName()+" started at: \t" + sdf.format(new Date()));  
 			Thread.currentThread().sleep(10000L);
 			System.out.println("hello," + name);
-			System.out.println(Thread.currentThread().getName() + " finished at: \t" + sdf.format(new Date()));  
+			System.out.println(context.getJobDetail().getKey() + ":" + Thread.currentThread().getName() + " finished at: \t" + sdf.format(new Date()));  
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
