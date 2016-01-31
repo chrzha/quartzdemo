@@ -1,7 +1,5 @@
 package com.quartz.demo.job;
 
-import java.util.Properties;
-
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -23,23 +21,11 @@ public class SimpleExample {
                 .build();
  
         Trigger trigger = TriggerBuilder.newTrigger()
-                .withSchedule(CronScheduleBuilder.cronSchedule("0/3 * * * * ?").withMisfireHandlingInstructionFireAndProceed())
+                .withSchedule(CronScheduleBuilder.cronSchedule("0/3 * * * * ?"))
                 .forJob("JOB1","Group1").startNow()
-                .build();
-        
-        JobDetail jobDetail2 = JobBuilder.newJob()
-                .ofType(FirstJob.class)
-                .usingJobData("name","chris")
-                .withIdentity("JOB2","Group2")
-                .build();
- 
-        Trigger trigger2 = TriggerBuilder.newTrigger()
-                .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?").withMisfireHandlingInstructionFireAndProceed())
-                .forJob("JOB2","Group2").startNow()
                 .build();
  
         scheduler.scheduleJob(jobDetail,trigger);
-        scheduler.scheduleJob(jobDetail2,trigger2);
  
         scheduler.start();
           
