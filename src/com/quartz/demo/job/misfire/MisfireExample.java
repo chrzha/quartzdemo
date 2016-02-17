@@ -62,16 +62,16 @@ public class MisfireExample {
     public void run() throws Exception {
         Logger log = LoggerFactory.getLogger(MisfireExample.class);
 
-        log.info("------- Initializing -------------------");
+        System.out.println("------- Initializing -------------------");
 
         // First we must get a reference to a scheduler
         SchedulerFactory sf = new StdSchedulerFactory();
         System.setProperty("org.quartz.properties", "src/quartz.properties");
         Scheduler sched = sf.getScheduler();
 
-        log.info("------- Initialization Complete -----------");
+        System.out.println("------- Initialization Complete -----------");
 
-        log.info("------- Scheduling Jobs -----------");
+        System.out.println("------- Scheduling Jobs -----------");
 
         // jobs can be scheduled before start() has been called
 
@@ -94,7 +94,7 @@ public class MisfireExample {
             .build();
         
         Date ft = sched.scheduleJob(job, trigger);
-        log.info(job.getKey() +
+        System.out.println(job.getKey() +
                 " will run at: " + ft +  
                 " and repeat: " + trigger.getRepeatCount() + 
                 " times, every " + trigger.getRepeatInterval() / 1000 + " seconds");
@@ -116,17 +116,17 @@ public class MisfireExample {
             .build();
         
         ft = sched.scheduleJob(job, trigger);
-        log.info(job.getKey() +
+        System.out.println(job.getKey() +
                 " will run at: " + ft +  
                 " and repeat: " + trigger.getRepeatCount() + 
                 " times, every " + trigger.getRepeatInterval() / 1000 + " seconds");
 
-        log.info("------- Starting Scheduler ----------------");
+        System.out.println("------- Starting Scheduler ----------------");
 
         // jobs don't start firing until start() has been called...
         sched.start();
 
-        log.info("------- Started Scheduler -----------------");
+        System.out.println("------- Started Scheduler -----------------");
         
         try {
             // sleep for ten minutes for triggers to file....
@@ -134,14 +134,14 @@ public class MisfireExample {
         } catch (Exception e) {
         }
  
-        log.info("------- Shutting Down ---------------------");
+        System.out.println("------- Shutting Down ---------------------");
 
         sched.shutdown(true);
 
-        log.info("------- Shutdown Complete -----------------");
+        System.out.println("------- Shutdown Complete -----------------");
 
         SchedulerMetaData metaData = sched.getMetaData();
-        log.info("Executed " + metaData.getNumberOfJobsExecuted() + " jobs.");
+        System.out.println("Executed " + metaData.getNumberOfJobsExecuted() + " jobs.");
     }
 
 
