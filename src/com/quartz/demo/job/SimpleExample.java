@@ -30,7 +30,7 @@ public class SimpleExample {
                 .forJob("JOB1","Group1").startNow()
                 .build();
  
-      //Listener attached to jobKey
+        //Listener attached to jobKey
     	scheduler.getListenerManager().addJobListener(
     		new MyJobListener(), KeyMatcher.keyEquals(jobKey)
     	);

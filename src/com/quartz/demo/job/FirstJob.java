@@ -9,10 +9,7 @@ import org.quartz.JobExecutionException;
 
 public class FirstJob implements Job {
 
-	public FirstJob() {
-
-	}
-
+	@Override
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
 		JobDataMap dataMap = context.getJobDetail().getJobDataMap();
