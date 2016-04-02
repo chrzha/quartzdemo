@@ -123,4 +123,10 @@ public class MyScheduleListener implements SchedulerListener{
 		
 	}
 
+	@Override
+	public void schedulerStarting() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
