@@ -20,14 +20,20 @@ public class SimpleExample {
                 .ofType(FirstJob.class)
                 .usingJobData("name","chris")
                 .withIdentity("Test1","Group1")
-                .build();//通过JobBuilder构建JobDetailImpl 实例,也可以直接new JobDetailImpl
+                .build();
  
         Trigger trigger = TriggerBuilder.newTrigger()
                 .withSchedule(CronScheduleBuilder.cronSchedule("0/3 * * * * ?").withMisfireHandlingInstructionFireAndProceed())
-                .forJob("Test1","Group1").startNow()      //Trigger找到对应的名称为Test1组为Group1的Job,如果不存在则会在执行scheduler.scheduleJob(jobDetail,trigger);报错
-                .build();//通过TriggerBuilder构建CronTriggerImpl实例,也可以直接new CronTriggerImpl
+                .forJob("Test1","Group1").startNow()
+                .build();
+        
+        Trigger trigger2 = TriggerBuilder.newTrigger()
+                .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?").withMisfireHandlingInstructionFireAndProceed())
+                .forJob("Test1","Group1").startNow()
+                .build();
  
-        scheduler.scheduleJob(jobDetail,trigger);//任务每3秒触发一次
+        scheduler.scheduleJob(jobDetail,trigger);
+        scheduler.scheduleJob(jobDetail,trigger2);
  
         scheduler.start();
           
